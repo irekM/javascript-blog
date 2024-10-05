@@ -54,13 +54,14 @@ function generateTitleLinks(){
 
     const articles = document.querySelectorAll('optArticleSelector');
 
-
+    let html = '';
     for(let article of articles) {
         const articleId = article.getAttribute('id');
         const articleTitle = article.querySelector(optTitleSelector).innerHTML;
         const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
         console.log('Created link HTML:', linkHTML);
         titleList.insertAdjacentHTML('beforeend', linkHTML);
+        html = html + linkHTML;
     }
     /*get the article id*/
 
@@ -71,7 +72,7 @@ function generateTitleLinks(){
     /*create HTML of the link*/
 
     /*insert link into titleList*/
-
+    titleList.innerHTML = html;
 }
 
 generateTitleLinks();
