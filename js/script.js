@@ -54,12 +54,13 @@ function generateTitleLinks(){
 
     const articles = document.querySelectorAll('optArticleSelector');
 
+
     for(let article of articles) {
         const articleId = article.getAttribute('id');
         const articleTitle = article.querySelector(optTitleSelector).innerHTML;
         const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
         console.log('Created link HTML:', linkHTML);
-        titleList.innerHTML = titleList.innerHTML + linkHTML;
+        titleList.insertAdjacentHTML('beforeend', linkHTML);
     }
     /*get the article id*/
 
