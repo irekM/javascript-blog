@@ -38,7 +38,8 @@ const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
   optArticleTagsSelector = '.post-tags .list',
-  optArticleAuthorSelector = '.post-author';
+  optArticleAuthorSelector = '.post-author',
+  optTagsListSelector = '.tags.list';
 
 
 function generateTitleLinks(customSelector = ''){
@@ -76,10 +77,32 @@ function generateTitleLinks(customSelector = ''){
 
 generateTitleLinks();
 
+/* Function which finds min max values of tags */
+
+function calculateTagsParams(tags) {
+  const params = {
+    max: 0,
+    min: 999999
+  };
+
+  for (let tag in tags) {
+    if (tags[tag] < params.min) {
+      params.min = tags[tag];
+    }
+    if (tags[tag] > params.max) {
+      params.max = tags[tag];
+    }
+    //console.log(tag + ' is used ' + tags[tag] + ' times');
+  }
+  return params;
+}
+
 
 //Function which generate tags
-
 function generateTags(){
+  /* [NEW] create a new variable allTags with an empty object */
+  let allTags = {};
+
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
 
@@ -108,6 +131,13 @@ function generateTags(){
 
       /* add generated code to html variable */
       html += tagHTML;
+      /* [NEW] check if this link is NOT already in allTags */
+      if(!allTags.hasOwnProperty(tag)) {
+      /* [NEW] add generated code to allTags object */
+        allTags[tag] = 1;
+      } else {
+        allTags[tag]++;
+      }
     }
     /* END LOOP: for each tag */
 
@@ -116,6 +146,29 @@ function generateTags(){
     tagsWrapper.innerHTML = html;
   }
   /* END LOOP: for every article: */
+
+  /* [NEW] find list of tags in right column */
+  const tagList = document.querySelector(optTagsListSelector);
+
+  /* [NEW] add html from allTags to tagList */
+  //tagList.innerHTML = allTags.join(' ');
+  //console.log(allTags);
+
+  const tagsParams = calculateTagsParams(allTags);
+  console.log('tagsParams:', tagsParams);
+  /*[NEW] create variable for all linkt HTML code */
+  let allTagsHTML = '';
+
+  /*[NEW] START LOOP: for each tag in allTags: */
+  for (let tag in allTags) {
+    /*[NEW] generate code of a link and add it to allTagsHTML */
+    allTagsHTML += tag + ' (' + allTags[tag] + ') ';
+  }
+
+  /*[NEW] END LOOP: for each tag in allTags: */
+
+  /*[NEW] add html from allTagsHTML to tagLIst */
+  tagList.innerHTML = allTagsHTML;
 }
 
 generateTags();
@@ -251,3 +304,5 @@ function addClickListenerToAuthors() {
 
 //incoke function of click listener
 addClickListenerToAuthors();
+
+
