@@ -118,3 +118,36 @@ body {
     margin: 0 10px 0 0;
   }
 }
+
+//tag size
+//the smallest size
+.tag-size-1 {
+  font-size: 80%; // Najmniejszy rozmiar
+  color: #5e8bb2; 
+}
+//a little bigger size
+.tag-size-2 {
+  font-size: 100%;
+  color: #2c3946;
+}
+//medium size
+.tag-size-3 {
+  font-size: 120%; 
+  color: #14273a;
+}
+//big size
+.tag-size-4 {
+  font-size: 150%; // Duży
+  color: #3a4249;
+}
+//the biggest size
+.tag-size-5 {
+  font-size: 180%; // Największy rozmiar
+  color: #000000; // Opcjonalnie czarny
+}
+
+//list elements as inline
+.tags.list li {
+  display: inline-block; 
+  margin-right: 10px; 
+}
