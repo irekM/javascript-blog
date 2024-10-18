@@ -151,3 +151,19 @@ body {
   display: inline-block; 
   margin-right: 10px; 
 }
+
+//styles for authors
+
+.authors.list li {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.authors.list li a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.authors.list li a:hover {
+  text-decoration: underline;
+}
